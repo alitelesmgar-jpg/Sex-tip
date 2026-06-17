@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2c7cb6;
+    --dark: #1f5e7a;
+    --bg: #f5f7fa;
+    --radius: 20px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: Tahoma, Vazirmatn, sans-serif;
+    background: var(--bg);
+    padding: 30px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* همه باکس‌ها */
+.top-nav,
+.first-table-wrapper,
+.primary-box,
+.second-box,
+.footer-info {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+/* منو */
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+}
+
+/* جدول‌ها */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* ========================================== */
+/* ستون دو قسمتی با float به جای grid */
+/* ========================================== */
+
+.two-columns {
+    /* clearfix برای رفع مشکل float */
+    overflow: hidden;
+}
+
+.skills-side {
+    float: right;  /* راست‌چین چون دایرکشن rtl است */
+    width: 32%;
+    background: #f7f9fc;
+    padding: 15px;
+    border-radius: var(--radius);
+}
+
+.form-side {
+    float: left;   /* چپ‌چین */
+    width: 65%;
+    background: #f7f9fc;
+    padding: 15px;
+    border-radius: var(--radius);
+}
+
+/* اگر می‌خواهید در حالت RTL برعکس شود (مهارت‌ها چپ و فرم راست) */
+/* می‌توانید مقادیر float را عوض کنید: skills-side float:left و form-side float:right */
+
+/* ------------------------------------------ */
+
+.box-title {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.skills-title-main {
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.skills-options-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form {
+    display: grid;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.gender-radio {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* باکس دوم - مربع‌ها و جدول (نیاز به تکمیل داشت) */
+.second-box {
+    overflow: hidden; /* clearfix */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.overlap-squares {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    float: right;
+}
+
+.blue-square {
+    width: 80px;
+    height: 80px;
+    background-color: #2c7cb6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.red-square {
+    width: 80px;
+    height: 80px;
+    background-color: #e74c3c;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.right-table-area {
+    flex: 1;
+    overflow-x: auto;
+}
+
+.inner-table {
+    width: 100%;
+    min-width: 300px;
+}
+
+/* فوتر */
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.author-source p {
+    margin: 5px 0;
+}
+
+.author-source a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-back {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+}
+
+.
