@@ -688,29 +688,21 @@
     </div>
   </main>
 
-  <script>
-    // ============ LOAD USER DATA FROM SESSION ============
-    function loadUserData() {
-      // Get data from URL parameters (passed from PHP via redirect)
-      // or use default admin data
-      const userData = {
-        full_name: 'ادمین اصلی',
-        username: 'admin',
-        email: 'admin@noir-or.com',
-        phone: '۰۹۱۲ ۳۴۵ ۶۷۸۹',
-        role: 'مدیر ارشد',
-        member_since: '۱۴۰۳/۰۱/۰۱',
-        last_login: new Date().toLocaleString('fa-IR', { 
-          year: 'numeric', 
-          month: '2-digit', 
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        }),
-        avatar: 'https://ui-avatars.com/api/?name=Admin&background=D4AF37&color=1E1410&size=200&bold=true&font-size=0.4'
-      };
-
-      // Populate UI
+<script>
+  // ============ CHECK AUTH ============
+  function checkAuth() {
+    const isLoggedIn = sessionStorage.getItem('noir_or_logged_in');
+    
+    if (!isLoggedIn) {
+      // Not logged in - redirect to login
+      window.location.href = 'login.html';
+      return;
+    }
+    
+    // Get user data from sessionStorage
+    const userData = JSON.parse(sessionStorage.getItem('noir_or_user'));
+    
+    if (userData) {
       document.getElementById('fullName').textContent = userData.full_name;
       document.getElementById('username').textContent = userData.username;
       document.getElementById('email').textContent = userData.email;
@@ -721,49 +713,70 @@
       document.getElementById('userAvatar').src = userData.avatar;
       document.getElementById('loginTime').textContent = userData.last_login;
     }
+  }
 
-    // ============ CHECK AUTH ============
-    function checkAuth() {
-      // Check if there's a session token in URL or localStorage
-      const urlParams = new URLSearchParams(window.location.search);
-      const auth = urlParams.get('auth');
+  // ============ LOGOUT ============
+  function logout() {
+    // Clear session storage
+    sessionStorage.removeItem('noir_or_logged_in');
+    sessionStorage.removeItem('noir_or_user');
+    
+    // Redirect to login
+    window.location.href = 'login.html?logout=1';
+  }
+
+  // ============ INIT ============
+  document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+  });
+
+  // ============ LOGOUT BUTTON ============
+  document.querySelector('.logout-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    logout();
+  });
+
+  // ============ SIDEBAR NAV ACTIVE STATE ============
+  document.querySelectorAll('.sidebar-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ============ ACTION BUTTONS ============
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const originalText = this.textContent;
+      this.textContent = '✓ انجام شد';
+      this.style.background = 'var(--gold)';
+      this.style.color = 'var(--espresso)';
+      this.style.borderColor = 'var(--gold)';
       
-      // For this demo, we'll always show data
-      // In production, this would check session/cookies
-      loadUserData();
-    }
-
-    // ============ INIT ============
-    document.addEventListener('DOMContentLoaded', () => {
-      checkAuth();
+      setTimeout(() => {
+        this.textContent = originalText;
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
+      }, 1500);
     });
+  });
 
-    // ============ SIDEBAR NAV ACTIVE STATE ============
-    document.querySelectorAll('.sidebar-nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    // ============ ACTION BUTTONS ============
-    document.querySelectorAll('.action-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const originalText = this.textContent;
-        this.textContent = '✓ انجام شد';
-        this.style.background = 'var(--gold)';
-        this.style.color = 'var(--espresso)';
-        this.style.borderColor = 'var(--gold)';
-        
-        setTimeout(() => {
-          this.textContent = originalText;
-          this.style.background = '';
-          this.style.color = '';
-          this.style.borderColor = '';
-        }, 1500);
-      });
-    });
-  </script>
+  // ============ AUTO LOGOUT AFTER 30 MINUTES ============
+  let logoutTimer;
+  
+  function resetLogoutTimer() {
+    clearTimeout(logoutTimer);
+    logoutTimer = setTimeout(() => {
+      logout();
+    }, 30 * 60 * 1000); // 30 minutes
+  }
+  
+  document.addEventListener('mousemove', resetLogoutTimer);
+  document.addEventListener('keypress', resetLogoutTimer);
+  document.addEventListener('click', resetLogoutTimer);
+  resetLogoutTimer();
+</script>
 </body>
 </html>
