@@ -114,6 +114,12 @@
       -webkit-backdrop-filter: blur(30px);
       box-shadow: 0 0 80px rgba(212, 175, 55, 0.05), 0 20px 60px rgba(0, 0, 0, 0.4);
       text-align: center;
+      animation: cardFadeIn 0.6s ease-out;
+    }
+
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .login-emblem {
@@ -152,6 +158,28 @@
       height: 1px;
       background: var(--gold);
       margin: 0 auto 2rem;
+    }
+
+    /* Success Message */
+    .success-message {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 0.8rem;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1.5rem;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-message p {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: #4ADE80;
     }
 
     /* Error Message */
@@ -237,6 +265,16 @@
       font-size: 1rem;
     }
 
+    .password-hint {
+      text-align: left;
+      margin-top: 0.3rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.05em;
+    }
+
     .btn-login {
       width: 100%;
       font-family: var(--sans);
@@ -263,6 +301,13 @@
 
     .btn-login:active {
       transform: scale(0.98);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
 
     .back-link {
@@ -323,10 +368,15 @@
         <p>⛔ رمز عبور اشتباه است. دوباره تلاش کنید.</p>
       </div>
 
+      <!-- Success/Logout Message -->
+      <div class="success-message" id="successMessage">
+        <p>✅ با موفقیت خارج شدید.</p>
+      </div>
+
       <!-- Form -->
-      <form class="login-form" id="loginForm" method="POST" action="login.php">
+      <form class="login-form" id="loginForm">
         <div class="input-group">
-          <input type="text" name="username" class="login-input" placeholder="نام کاربری" value="admin" readonly required>
+          <input type="text" name="username" class="login-input" value="admin" readonly required>
           <span class="input-icon">👤</span>
         </div>
         
@@ -334,8 +384,9 @@
           <input type="password" name="password" class="login-input" id="passwordInput" placeholder="رمز عبور" required autofocus>
           <span class="input-icon">🔒</span>
         </div>
+        <div class="password-hint">رمز عبور: zizuzizu</div>
 
-        <button type="submit" class="btn-login">ورود به پنل</button>
+        <button type="submit" class="btn-login" id="loginBtn">ورود به پنل</button>
       </form>
 
       <a href="index.html" class="back-link">← بازگشت به سایت</a>
@@ -343,15 +394,43 @@
   </div>
 
   <script>
-    // ============ CHECK URL PARAMETERS FOR ERROR ============
-    const urlParams = new URLSearchParams(window.location.search);
-    const error = urlParams.get('error');
-    
-    if (error === '1') {
-      document.getElementById('errorMessage').classList.add('show');
-      // Clear the URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    // ============ CHECK URL PARAMETERS ============
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const error = urlParams.get('error');
+      const logout = urlParams.get('logout');
+      
+      if (error === '1') {
+        document.getElementById('errorMessage').classList.add('show');
+        // Shake the card
+        const card = document.querySelector('.login-card');
+        card.style.animation = 'none';
+        card.offsetHeight;
+        card.style.animation = 'shake 0.5s ease-out';
+      }
+      
+      if (logout === '1') {
+        document.getElementById('successMessage').classList.add('show');
+      }
+      
+      // Clear URL
+      if (error || logout) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    })();
+
+    // Shake animation
+    const shakeStyle = document.createElement('style');
+    shakeStyle.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-8px); }
+        40% { transform: translateX(8px); }
+        60% { transform: translateX(-5px); }
+        80% { transform: translateX(5px); }
+      }
+    `;
+    document.head.appendChild(shakeStyle);
 
     // ============ PARTICLES MOUSE INTERACTION ============
     const particles = document.querySelectorAll('.particle');
@@ -367,11 +446,70 @@
       });
     });
 
-    // ============ FORM SUBMIT EFFECT ============
+    // ============ FORM SUBMIT ============
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-      const btn = this.querySelector('.btn-login');
-      btn.textContent = 'در حال بررسی...';
-      btn.style.opacity = '0.7';
+      e.preventDefault();
+      
+      const password = document.getElementById('passwordInput').value.trim();
+      const btn = document.getElementById('loginBtn');
+      const errorMsg = document.getElementById('errorMessage');
+      const successMsg = document.getElementById('successMessage');
+      
+      // Hide previous messages
+      errorMsg.classList.remove('show');
+      successMsg.classList.remove('show');
+      
+      if (!password) {
+        return;
+      }
+      
+      // Check password directly in JavaScript first
+      if (password === 'zizuzizu') {
+        // Success - redirect to dashboard
+        btn.textContent = '✅ در حال ورود...';
+        btn.disabled = true;
+        btn.style.background = '#4ADE80';
+        btn.style.color = 'white';
+        
+        // Store login state in sessionStorage
+        sessionStorage.setItem('noir_or_logged_in', 'true');
+        sessionStorage.setItem('noir_or_user', JSON.stringify({
+          username: 'admin',
+          full_name: 'ادمین اصلی',
+          email: 'admin@noir-or.com',
+          role: 'مدیر ارشد',
+          phone: '۰۹۱۲ ۳۴۵ ۶۷۸۹',
+          member_since: '۱۴۰۳/۰۱/۰۱',
+          last_login: new Date().toLocaleString('fa-IR'),
+          avatar: 'https://ui-avatars.com/api/?name=Admin&background=D4AF37&color=1E1410&size=200&bold=true&font-size=0.4'
+        }));
+        
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+        
+      } else {
+        // Wrong password
+        errorMsg.classList.add('show');
+        
+        // Shake card
+        const card = document.querySelector('.login-card');
+        card.style.animation = 'none';
+        card.offsetHeight;
+        card.style.animation = 'shake 0.5s ease-out';
+        
+        // Clear password field
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
+    });
+
+    // ============ ENTER KEY TO SUBMIT ============
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+      }
     });
   </script>
 </body>
