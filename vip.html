@@ -5,14 +5,367 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VIP — NOIR & OR</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="vip.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ============ VIP PAGE SPECIFIC STYLES ============ */
+    
+    .vip-body {
+      background: var(--espresso);
+      color: var(--white);
+      position: relative;
+    }
+
+    /* Gold Particles */
+    .vip-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gold-particle {
+      position: absolute;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: goldFloat 6s infinite ease-in;
+    }
+
+    .gold-particle:nth-child(1) { width: 2px; height: 2px; left: 5%; animation-delay: 0s; animation-duration: 7s; }
+    .gold-particle:nth-child(2) { width: 3px; height: 3px; left: 15%; animation-delay: 0.5s; animation-duration: 8s; }
+    .gold-particle:nth-child(3) { width: 1px; height: 1px; left: 25%; animation-delay: 1s; animation-duration: 5s; }
+    .gold-particle:nth-child(4) { width: 4px; height: 4px; left: 35%; animation-delay: 1.5s; animation-duration: 9s; }
+    .gold-particle:nth-child(5) { width: 2px; height: 2px; left: 45%; animation-delay: 2s; animation-duration: 6s; }
+    .gold-particle:nth-child(6) { width: 3px; height: 3px; left: 55%; animation-delay: 0.8s; animation-duration: 10s; }
+    .gold-particle:nth-child(7) { width: 1px; height: 1px; left: 65%; animation-delay: 2.5s; animation-duration: 7s; }
+    .gold-particle:nth-child(8) { width: 2px; height: 2px; left: 75%; animation-delay: 1.2s; animation-duration: 8s; }
+    .gold-particle:nth-child(9) { width: 3px; height: 3px; left: 85%; animation-delay: 3s; animation-duration: 6s; }
+    .gold-particle:nth-child(10) { width: 1px; height: 1px; left: 95%; animation-delay: 0.3s; animation-duration: 9s; }
+
+    @keyframes goldFloat {
+      0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+      30% { opacity: 0.8; }
+      70% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) translateX(30px) scale(1.5); opacity: 0; }
+    }
+
+    /* VIP Hero */
+    .vip-hero {
+      position: relative;
+      z-index: 1;
+      padding: 12rem 0 6rem;
+      text-align: center;
+    }
+
+    .vip-emblem {
+      font-size: 3rem;
+      color: var(--gold);
+      animation: pulse 3s ease-in-out infinite;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .vip-label {
+      display: block;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+
+    .vip-title {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.05em;
+    }
+
+    .golden-line-lg {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 1.5rem auto;
+    }
+
+    .vip-subtitle {
+      font-family: var(--sans);
+      font-weight: 200;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* VIP Products — FULLY VISIBLE */
+    .vip-products {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 0;
+    }
+
+    .vip-products-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .vip-product-card {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all var(--transition-medium);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .vip-product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(212, 175, 55, 0.1);
+    }
+
+    .vip-product-image {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vip-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .vip-product-card:hover .vip-product-image img {
+      transform: scale(1.08);
+    }
+
+    .vip-product-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      text-align: center;
+      transform: translateY(0);
+      transition: all var(--transition-medium);
+    }
+
+    .vip-product-card:hover .vip-product-overlay {
+      padding-bottom: 2.5rem;
+    }
+
+    .vip-product-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.3rem;
+    }
+
+    .vip-product-origin {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .vip-product-price {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .vip-product-price span {
+      font-family: var(--sans);
+      font-weight: 200;
+      font-size: 0.7rem;
+      opacity: 0.5;
+    }
+
+    .vip-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--espresso);
+      background: var(--gold);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      z-index: 2;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .vip-add-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: white;
+      background: var(--burgundy);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      opacity: 0;
+      transition: all var(--transition-medium);
+      z-index: 3;
+    }
+
+    .vip-product-card:hover .vip-add-btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .vip-add-btn:hover {
+      background: var(--gold);
+      color: var(--espresso);
+    }
+
+    /* Membership Section */
+    .membership {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .membership-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 1.5rem;
+      padding: 4rem;
+      max-width: 550px;
+      width: 90%;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 60px rgba(212, 175, 55, 0.05);
+    }
+
+    .gold-diamond {
+      font-size: 2rem;
+      color: var(--gold);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .membership-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin: 1rem 0;
+    }
+
+    .membership-desc {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 2;
+      margin-bottom: 2rem;
+    }
+
+    .membership-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .input-group {
+      width: 100%;
+    }
+
+    .vip-input {
+      width: 100%;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: white;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.8rem 0;
+      outline: none;
+      letter-spacing: 0.05em;
+      transition: border-color var(--transition-fast);
+    }
+
+    .vip-input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .vip-input:focus {
+      border-bottom-color: var(--gold);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .membership-note {
+      font-family: var(--sans);
+      font-weight: 200;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.2);
+      margin-top: 1.5rem;
+    }
+
+    /* VIP Footer */
+    .vip-footer {
+      background: rgba(20, 12, 8, 0.9);
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .vip-products-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+      }
+
+      .vip-title {
+        font-size: 2.5rem;
+      }
+
+      .membership-card {
+        padding: 2rem;
+      }
+    }
+  </style>
 </head>
 <body class="vip-body">
 
-  <!-- ============ GOLD PARTICLES BACKGROUND ============ -->
+  <!-- ============ GOLD PARTICLES ============ -->
   <div class="vip-particles">
     <div class="gold-particle"></div>
     <div class="gold-particle"></div>
@@ -27,13 +380,14 @@
   </div>
 
   <!-- ============ NAVIGATION ============ -->
-  <nav class="nav vip-nav scrolled">
+  <nav class="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand" style="color: var(--gold);">Noir & Or</a>
+      <a href="index.html" class="nav-brand">Noir & Or</a>
       <ul class="nav-links">
         <li><a href="products.html" class="nav-link">فروشگاه</a></li>
         <li><a href="featured.html" class="nav-link">ویژه</a></li>
         <li><a href="vip.html" class="nav-link active">VIP</a></li>
+        <li><a href="index.html#story" class="nav-link">داستان ما</a></li>
       </ul>
     </div>
   </nav>
@@ -45,50 +399,66 @@
       <span class="vip-label">Le Cercle Privé</span>
       <h1 class="vip-title">باشگاه خصوصی</h1>
       <div class="golden-line-lg"></div>
-      <p class="vip-subtitle">مجموعه‌ای که تنها برای معدودی آشکار می‌شود</p>
+      <p class="vip-subtitle">مجموعه‌ای انحصاری برای اعضای ویژه</p>
     </div>
   </section>
 
-  <!-- ============ VIP PRODUCTS (BLURRED FOR GUESTS) ============ -->
+  <!-- ============ VIP PRODUCTS — FULLY VISIBLE ============ -->
   <section class="vip-products">
     <div class="vip-products-grid">
-      <div class="vip-product-card blurred reveal">
-        <div class="vip-product-blur">
-          <img src="https://images.unsplash.com/photo-1551218372-a8789b81b253?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="محصول VIP">
+      <!-- Product 1 -->
+      <div class="vip-product-card reveal">
+        <div class="vip-product-image">
+          <img src="https://images.unsplash.com/photo-1551218372-a8789b81b253?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="خاویار بلوگا">
+          <div class="vip-badge">VIP Exclusive</div>
+          <button class="vip-add-btn">افزودن به سبد</button>
         </div>
-        <div class="vip-lock-overlay">
-          <div class="vip-lock-icon">🔒</div>
-          <p>فقط با دعوت‌نامه</p>
-        </div>
-      </div>
-
-      <div class="vip-product-card blurred reveal">
-        <div class="vip-product-blur">
-          <img src="https://images.unsplash.com/photo-1579366948929-444b79881105?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="محصول VIP">
-        </div>
-        <div class="vip-lock-overlay">
-          <div class="vip-lock-icon">🔒</div>
-          <p>فقط با دعوت‌نامه</p>
+        <div class="vip-product-overlay">
+          <h3 class="vip-product-name">خاویار بلوگا امپریال</h3>
+          <p class="vip-product-origin">دریای کاسپین • رده AAA+</p>
+          <p class="vip-product-price">۱۲,۵۰۰,۰۰۰ <span>تومان</span></p>
         </div>
       </div>
 
-      <div class="vip-product-card blurred reveal">
-        <div class="vip-product-blur">
-          <img src="https://images.unsplash.com/photo-1589227365533-cee630bd59bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="محصول VIP">
+      <!-- Product 2 -->
+      <div class="vip-product-card reveal">
+        <div class="vip-product-image">
+          <img src="https://images.unsplash.com/photo-1579366948929-444b79881105?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="ترافل">
+          <div class="vip-badge">VIP Exclusive</div>
+          <button class="vip-add-btn">افزودن به سبد</button>
         </div>
-        <div class="vip-lock-overlay">
-          <div class="vip-lock-icon">🔒</div>
-          <p>فقط با دعوت‌نامه</p>
+        <div class="vip-product-overlay">
+          <h3 class="vip-product-name">ترافل سفید سلطنتی</h3>
+          <p class="vip-product-origin">پیمونته، ایتالیا • ۵۰ گرم</p>
+          <p class="vip-product-price">۶,۸۰۰,۰۰۰ <span>تومان</span></p>
         </div>
       </div>
 
-      <div class="vip-product-card blurred reveal">
-        <div class="vip-product-blur">
-          <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="محصول VIP">
+      <!-- Product 3 -->
+      <div class="vip-product-card reveal">
+        <div class="vip-product-image">
+          <img src="https://images.unsplash.com/photo-1589227365533-cee630bd59bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="زعفران">
+          <div class="vip-badge">VIP Exclusive</div>
+          <button class="vip-add-btn">افزودن به سبد</button>
         </div>
-        <div class="vip-lock-overlay">
-          <div class="vip-lock-icon">🔒</div>
-          <p>فقط با دعوت‌نامه</p>
+        <div class="vip-product-overlay">
+          <h3 class="vip-product-name">زعفران سوپر نگین ممتاز</h3>
+          <p class="vip-product-origin">قائنات، ایران • ۲۰ گرم</p>
+          <p class="vip-product-price">۵,۲۰۰,۰۰۰ <span>تومان</span></p>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="vip-product-card reveal">
+        <div class="vip-product-image">
+          <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="روغن کمیاب">
+          <div class="vip-badge">VIP Exclusive</div>
+          <button class="vip-add-btn">افزودن به سبد</button>
+        </div>
+        <div class="vip-product-overlay">
+          <h3 class="vip-product-name">روغن آرگان وحشی مراکش</h3>
+          <p class="vip-product-origin">کوه‌های اطلس • ۲۵۰ml</p>
+          <p class="vip-product-price">۳,۹۰۰,۰۰۰ <span>تومان</span></p>
         </div>
       </div>
     </div>
@@ -116,11 +486,11 @@
         <div class="input-group">
           <input type="tel" placeholder="شماره تماس" class="vip-input">
         </div>
-        <button type="submit" class="btn btn-gold btn-full">درخواست عضویت</button>
+        <button type="submit" class="btn btn-gold btn-full">ثبت‌نام در باشگاه</button>
       </form>
       
       <p class="membership-note">
-        * درخواست شما بررسی و در صورت تأیید، دعوت‌نامه ارسال می‌شود.
+        * با ثبت‌نام، به جامعهٔ نوآر و اور می‌پیوندید و از مزایای ویژه برخوردار می‌شوید.
       </p>
     </div>
   </section>
@@ -129,7 +499,7 @@
   <footer class="footer vip-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-logo">Noir & Or</span>
+        <span class="footer-logo">Noir &amp; Or</span>
         <p>هنر طعم ناب، از ۱۸۹۲</p>
       </div>
       <div class="footer-links">
@@ -143,6 +513,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="vip.js"></script>
 </body>
 </html>
