@@ -58,7 +58,7 @@
     .vip-hero {
       position: relative;
       z-index: 1;
-      padding: 12rem 0 6rem;
+      padding: 12rem 0 4rem;
       text-align: center;
     }
 
@@ -105,11 +105,28 @@
       margin: 0 auto;
     }
 
-    /* VIP Products — FULLY VISIBLE */
+    /* VIP Products */
     .vip-products {
       position: relative;
       z-index: 1;
       padding: 4rem 0;
+    }
+
+    .vip-section-title {
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 3rem;
+      letter-spacing: 0.05em;
+    }
+
+    .vip-section-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 3rem;
     }
 
     .vip-products-grid {
@@ -164,12 +181,6 @@
       padding: 2rem 1.5rem;
       background: linear-gradient(transparent, rgba(0,0,0,0.8));
       text-align: center;
-      transform: translateY(0);
-      transition: all var(--transition-medium);
-    }
-
-    .vip-product-card:hover .vip-product-overlay {
-      padding-bottom: 2.5rem;
     }
 
     .vip-product-name {
@@ -250,93 +261,280 @@
       color: var(--espresso);
     }
 
-    /* Membership Section */
-    .membership {
+    /* ============ CREATOR SECTION — NEW ============ */
+    .creator-section {
       position: relative;
       z-index: 1;
-      padding: 6rem 0;
+      padding: 6rem 0 8rem;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
 
-    .membership-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 1.5rem;
-      padding: 4rem;
-      max-width: 550px;
-      width: 90%;
+    .creator-wrapper {
       text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 60px rgba(212, 175, 55, 0.05);
+      position: relative;
     }
 
-    .gold-diamond {
-      font-size: 2rem;
-      color: var(--gold);
-      animation: pulse 3s ease-in-out infinite;
+    .creator-label {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.5rem;
     }
 
-    .membership-title {
+    /* The Magic Button */
+    .creator-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1.4rem 3.5rem;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--espresso);
+      background: linear-gradient(135deg, var(--gold) 0%, #C9A030 50%, var(--gold) 100%);
+      background-size: 200% 200%;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3), 0 0 0 0 rgba(212, 175, 55, 0);
+      animation: shimmerBg 3s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes shimmerBg {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .creator-btn::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 50px;
+      background: linear-gradient(45deg, var(--gold), #FFF8DC, var(--gold), #FFF8DC);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: borderGlow 3s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .creator-btn:hover::before {
+      opacity: 1;
+    }
+
+    .creator-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.2);
+      color: #000;
+    }
+
+    .creator-btn:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+
+    .btn-sparkle {
+      display: inline-block;
+      font-size: 1.3rem;
+      animation: sparkleFloat 2s ease-in-out infinite;
+    }
+
+    .btn-sparkle:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .btn-sparkle:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes sparkleFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      50% { transform: translateY(-5px) rotate(15deg); opacity: 1; }
+    }
+
+    /* Reveal Card */
+    .creator-reveal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(30, 20, 16, 0.95);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212, 175, 55, 0.15);
+      min-width: 380px;
+      max-width: 90vw;
+    }
+
+    .creator-reveal.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .reveal-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .reveal-title {
       font-family: var(--serif);
       font-size: 2rem;
       font-weight: 600;
       color: var(--gold);
-      margin: 1rem 0;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
     }
 
-    .membership-desc {
+    .reveal-subtitle {
       font-family: var(--sans);
       font-weight: 300;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 2;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
       margin-bottom: 2rem;
     }
 
-    .membership-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .reveal-line {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem;
     }
 
-    .input-group {
-      width: 100%;
+    .telegram-id {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 2rem;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      cursor: pointer;
     }
 
-    .vip-input {
-      width: 100%;
+    .telegram-id:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+      transform: scale(1.05);
+    }
+
+    .telegram-icon {
+      font-size: 1.5rem;
+      animation: telegramBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes telegramBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .telegram-text {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .telegram-arrow {
       font-family: var(--sans);
       font-weight: 300;
-      font-size: 0.85rem;
-      color: white;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.8rem 0;
-      outline: none;
-      letter-spacing: 0.05em;
-      transition: border-color var(--transition-fast);
+      font-size: 1.2rem;
+      color: var(--gold);
+      transition: transform 0.3s ease;
     }
 
-    .vip-input::placeholder {
-      color: rgba(255,255,255,0.2);
+    .telegram-id:hover .telegram-arrow {
+      transform: translateX(-5px);
     }
 
-    .vip-input:focus {
-      border-bottom-color: var(--gold);
+    .close-reveal {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
     }
 
-    .btn-full {
+    .close-reveal:hover {
+      background: rgba(220, 38, 38, 0.2);
+      border-color: rgba(220, 38, 38, 0.4);
+      color: #FCA5A5;
+    }
+
+    /* Dark overlay */
+    .creator-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
     }
 
-    .membership-note {
-      font-family: var(--sans);
-      font-weight: 200;
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.2);
+    .creator-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .creator-quote {
       margin-top: 1.5rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
     }
 
     /* VIP Footer */
@@ -357,8 +555,15 @@
         font-size: 2.5rem;
       }
 
-      .membership-card {
-        padding: 2rem;
+      .creator-reveal {
+        min-width: auto;
+        width: 90vw;
+        padding: 2rem 1.5rem;
+      }
+
+      .creator-btn {
+        padding: 1.2rem 2.5rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -387,6 +592,7 @@
         <li><a href="products.html" class="nav-link">فروشگاه</a></li>
         <li><a href="featured.html" class="nav-link">ویژه</a></li>
         <li><a href="vip.html" class="nav-link active">VIP</a></li>
+        <li><a href="membership.html" class="nav-link">عضویت</a></li>
         <li><a href="index.html#story" class="nav-link">داستان ما</a></li>
       </ul>
     </div>
@@ -403,8 +609,11 @@
     </div>
   </section>
 
-  <!-- ============ VIP PRODUCTS — FULLY VISIBLE ============ -->
+  <!-- ============ VIP PRODUCTS ============ -->
   <section class="vip-products">
+    <h2 class="vip-section-title reveal">مجموعهٔ VIP</h2>
+    <div class="vip-section-line reveal"></div>
+    
     <div class="vip-products-grid">
       <!-- Product 1 -->
       <div class="vip-product-card reveal">
@@ -464,34 +673,37 @@
     </div>
   </section>
 
-  <!-- ============ MEMBERSHIP SECTION ============ -->
-  <section class="membership">
-    <div class="membership-card reveal">
-      <div class="membership-badge">
-        <span class="gold-diamond">◆</span>
+  <!-- ============ CREATOR SECTION ============ -->
+  <section class="creator-section">
+    <div class="creator-wrapper">
+      <p class="creator-label reveal">— طراحی و توسعه —</p>
+      
+      <!-- Magic Button -->
+      <button class="creator-btn reveal" id="creatorBtn">
+        <span class="btn-sparkle">✨</span>
+        سازنده سایت
+        <span class="btn-sparkle">✨</span>
+      </button>
+
+      <!-- Dark Overlay -->
+      <div class="creator-overlay" id="creatorOverlay"></div>
+
+      <!-- Reveal Card -->
+      <div class="creator-reveal" id="creatorReveal">
+        <button class="close-reveal" id="closeReveal">✕</button>
+        <div class="reveal-icon">💎</div>
+        <h3 class="reveal-title">ارتباط با سازنده</h3>
+        <p class="reveal-subtitle">برای پروژه‌های خاص و سفارشی</p>
+        <div class="reveal-line"></div>
+        
+        <a href="https://t.me/mosalaaty" target="_blank" class="telegram-id">
+          <span class="telegram-icon">✈️</span>
+          <span class="telegram-text">@mosalaaty</span>
+          <span class="telegram-arrow">→</span>
+        </a>
+        
+        <p class="creator-quote">"لوکس بودن یک انتخاب است، نه یک قیمت"</p>
       </div>
-      <h2 class="membership-title">عضویت طلایی</h2>
-      <p class="membership-desc">
-        به حلقهٔ داخلی نوآر و اور بپیوندید. هر ماه، جعبه‌ای از کمیاب‌ترین محصولات فصل، 
-        پیش از عموم، به دست شما می‌رسد. به علاوهٔ دعوت به رویدادهای خصوصی چشایی در سراسر جهان.
-      </p>
-      
-      <form class="membership-form">
-        <div class="input-group">
-          <input type="text" placeholder="نام کامل" class="vip-input">
-        </div>
-        <div class="input-group">
-          <input type="email" placeholder="ایمیل" class="vip-input">
-        </div>
-        <div class="input-group">
-          <input type="tel" placeholder="شماره تماس" class="vip-input">
-        </div>
-        <button type="submit" class="btn btn-gold btn-full">ثبت‌نام در باشگاه</button>
-      </form>
-      
-      <p class="membership-note">
-        * با ثبت‌نام، به جامعهٔ نوآر و اور می‌پیوندید و از مزایای ویژه برخوردار می‌شوید.
-      </p>
     </div>
   </section>
 
@@ -506,6 +718,7 @@
         <a href="products.html">فروشگاه</a>
         <a href="featured.html">ویژه</a>
         <a href="vip.html">VIP</a>
+        <a href="membership.html">عضویت</a>
         <a href="#">تماس</a>
       </div>
       <div class="footer-copy">© ۱۴۰۴ — تمامی حقوق محفوظ است.</div>
@@ -513,5 +726,54 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // ============ CREATOR REVEAL MAGIC ============
+    const creatorBtn = document.getElementById('creatorBtn');
+    const creatorReveal = document.getElementById('creatorReveal');
+    const creatorOverlay = document.getElementById('creatorOverlay');
+    const closeReveal = document.getElementById('closeReveal');
+
+    function openReveal() {
+      creatorReveal.classList.add('active');
+      creatorOverlay.classList.add('active');
+      creatorBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        creatorBtn.style.transform = '';
+      }, 300);
+    }
+
+    function closeRevealFn() {
+      creatorReveal.classList.remove('active');
+      creatorOverlay.classList.remove('active');
+    }
+
+    creatorBtn.addEventListener('click', openReveal);
+    closeReveal.addEventListener('click', closeRevealFn);
+    creatorOverlay.addEventListener('click', closeRevealFn);
+
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && creatorReveal.classList.contains('active')) {
+        closeRevealFn();
+      }
+    });
+
+    // ============ ADD TO CART ============
+    document.querySelectorAll('.vip-add-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const originalText = this.textContent;
+        this.textContent = '✓ افزوده شد';
+        this.style.background = 'var(--gold)';
+        this.style.color = 'var(--espresso)';
+        
+        setTimeout(() => {
+          this.textContent = originalText;
+          this.style.background = '';
+          this.style.color = '';
+        }, 2000);
+      });
+    });
+  </script>
 </body>
 </html>
