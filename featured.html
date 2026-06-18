@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -6,15 +5,257 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ویژه — NOIR & OR</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="featured.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ============ FEATURED PAGE SPECIFIC STYLES ============ */
+    
+    .featured-header {
+      height: 50vh;
+      min-height: 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .featured-header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--espresso);
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3);
+    }
+
+    .featured-header-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .featured-header-content h1 {
+      font-size: 4rem;
+      color: white;
+    }
+
+    .featured-header-content p {
+      color: rgba(255,255,255,0.5);
+      max-width: 500px;
+      margin: 1rem auto;
+      font-weight: 300;
+    }
+
+    /* Story Cards */
+    .story-cards {
+      background: var(--off-white);
+      padding: 6rem 0;
+    }
+
+    .story-card {
+      max-width: 1200px;
+      margin: 0 auto 8rem;
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .story-card.reverse {
+      direction: ltr;
+    }
+
+    .story-card.reverse .story-card-text {
+      direction: rtl;
+    }
+
+    .story-card-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .story-card-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .story-card:hover .story-card-image img {
+      transform: scale(1.05);
+    }
+
+    .story-card-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .story-card-text {
+      padding: 2rem 0;
+    }
+
+    .story-card-label {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .story-card-text h2 {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--espresso);
+      margin: 0.5rem 0 1rem;
+    }
+
+    .golden-line-sm {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-card-text p {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(30,20,16,0.7);
+      line-height: 2;
+    }
+
+    .story-card-details {
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .story-card-details span {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: rgba(30,20,16,0.4);
+      letter-spacing: 0.05em;
+    }
+
+    .story-price {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-price span {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* Full Width Story Card */
+    .story-card-full {
+      max-width: 1200px;
+      margin: 0 auto 8rem;
+      padding: 0 4rem;
+      position: relative;
+    }
+
+    .story-card-full-image {
+      overflow: hidden;
+      border-radius: 4px;
+      max-height: 500px;
+    }
+
+    .story-card-full-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s ease;
+    }
+
+    .story-card-full:hover .story-card-full-image img {
+      transform: scale(1.03);
+    }
+
+    .story-card-full-text {
+      background: white;
+      padding: 2rem;
+      margin: -4rem 4rem 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: var(--shadow-card-hover);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .story-card-full-text h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--espresso);
+      margin: 0.5rem 0;
+    }
+
+    .story-card-full-text p {
+      font-family: var(--sans);
+      font-weight: 300;
+      color: rgba(30,20,16,0.6);
+      line-height: 2;
+      max-width: 600px;
+      margin: 1rem auto;
+    }
+
+    .story-card-full .story-card-number {
+      color: rgba(255,255,255,0.5);
+      font-size: 6rem;
+    }
+
+    @media (max-width: 768px) {
+      .story-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        padding: 0 2rem;
+      }
+
+      .story-card.reverse {
+        direction: rtl;
+      }
+
+      .story-card-full {
+        padding: 0 2rem;
+      }
+
+      .story-card-full-text {
+        margin: -2rem 1rem 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- ============ NAVIGATION ============ -->
-  <nav class="nav scrolled">
+  <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">Noir & Or</a>
       <ul class="nav-links">
@@ -28,19 +269,17 @@
 
   <!-- ============ PAGE HEADER ============ -->
   <section class="featured-header">
+    <div class="featured-header-bg"></div>
     <div class="featured-header-content reveal">
       <span class="section-label" style="color: var(--gold);">مجموعهٔ ویژه</span>
-      <h1 class="section-title" style="color: white; font-size: 4rem;">شاهکارهای فصل</h1>
-      <p style="color: rgba(255,255,255,0.5); max-width: 500px; margin: 1rem auto; font-weight: 300;">
-        هر قطعه از این مجموعه، داستانی منحصربه‌فرد از سفر به دورترین نقاط جهان دارد
-      </p>
+      <h1 class="section-title">شاهکارهای فصل</h1>
+      <p>هر قطعه از این مجموعه، داستانی منحصربه‌فرد از سفر به دورترین نقاط جهان دارد</p>
     </div>
-    <div class="featured-header-bg"></div>
   </section>
 
-  <!-- ============ STORY CARDS (ASYMMETRIC) ============ -->
+  <!-- ============ STORY CARDS ============ -->
   <section class="story-cards">
-    <!-- Card 1 - Image Left -->
+    <!-- Card 1 -->
     <div class="story-card reveal">
       <div class="story-card-image">
         <img src="https://images.unsplash.com/photo-1551218372-a8789b81b253?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="خاویار">
@@ -60,7 +299,7 @@
       </div>
     </div>
 
-    <!-- Card 2 - Image Right -->
+    <!-- Card 2 -->
     <div class="story-card reverse reveal">
       <div class="story-card-image">
         <img src="https://images.unsplash.com/photo-1579366948929-444b79881105?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="ترافل">
@@ -80,7 +319,7 @@
       </div>
     </div>
 
-    <!-- Card 3 - Full Width Story -->
+    <!-- Card 3 -->
     <div class="story-card-full reveal">
       <div class="story-card-full-image">
         <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="روغن زیتون">
@@ -95,7 +334,7 @@
       </div>
     </div>
 
-    <!-- Card 4 - Image Left -->
+    <!-- Card 4 -->
     <div class="story-card reveal">
       <div class="story-card-image">
         <img src="https://images.unsplash.com/photo-1589227365533-cee630bd59bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="زعفران">
@@ -120,7 +359,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-logo">Noir & Or</span>
+        <span class="footer-logo">Noir &amp; Or</span>
         <p>هنر طعم ناب، از ۱۸۹۲</p>
       </div>
       <div class="footer-links">
@@ -134,6 +373,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="featured.js"></script>
 </body>
 </html>
