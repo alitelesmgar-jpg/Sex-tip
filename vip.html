@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ============ VIP PAGE SPECIFIC STYLES ============ */
     
@@ -17,7 +17,7 @@
       position: relative;
     }
 
-    /* Gold Particles */
+    /* ============ GOLD PARTICLES ============ */
     .vip-particles {
       position: fixed;
       top: 0;
@@ -54,7 +54,7 @@
       100% { transform: translateY(-10vh) translateX(30px) scale(1.5); opacity: 0; }
     }
 
-    /* VIP Hero */
+    /* ============ VIP HERO ============ */
     .vip-hero {
       position: relative;
       z-index: 1;
@@ -105,7 +105,7 @@
       margin: 0 auto;
     }
 
-    /* VIP Products */
+    /* ============ VIP PRODUCTS ============ */
     .vip-products {
       position: relative;
       z-index: 1;
@@ -145,7 +145,7 @@
       aspect-ratio: 3/4;
       cursor: pointer;
       border: 1px solid rgba(212, 175, 55, 0.2);
-      transition: all var(--transition-medium);
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
       background: rgba(255,255,255,0.02);
     }
 
@@ -179,7 +179,7 @@
       left: 0;
       right: 0;
       padding: 2rem 1.5rem;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
       text-align: center;
     }
 
@@ -237,7 +237,7 @@
       left: 50%;
       transform: translate(-50%, -50%) scale(0.8);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       font-size: 0.8rem;
       letter-spacing: 0.1em;
       color: white;
@@ -247,7 +247,7 @@
       border-radius: 50px;
       cursor: pointer;
       opacity: 0;
-      transition: all var(--transition-medium);
+      transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
       z-index: 3;
     }
 
@@ -259,31 +259,149 @@
     .vip-add-btn:hover {
       background: var(--gold);
       color: var(--espresso);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
     }
 
-    /* ============ CREATOR SECTION — NEW ============ */
+    /* ============ CREATOR SECTION — MASTERPIECE ============ */
     .creator-section {
       position: relative;
       z-index: 1;
-      padding: 6rem 0 8rem;
+      padding: 8rem 0 10rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: visible;
+    }
+
+    /* Orbital Rings */
+    .orbital-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      width: 400px;
+      height: 400px;
+    }
+
+    .orbital-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.08);
+      transform: translate(-50%, -50%);
+      animation: rotateRing 20s linear infinite;
+    }
+
+    .orbital-ring:nth-child(1) {
+      width: 350px;
+      height: 350px;
+      animation-duration: 20s;
+    }
+
+    .orbital-ring:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      animation-duration: 15s;
+      animation-direction: reverse;
+      border-color: rgba(212, 175, 55, 0.12);
+    }
+
+    .orbital-ring:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      animation-duration: 25s;
+      border-style: dashed;
+      border-color: rgba(212, 175, 55, 0.06);
+    }
+
+    .orbital-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold-glow);
+      animation: orbitDot 8s linear infinite;
+    }
+
+    .orbital-dot:nth-child(4) {
+      top: 0;
+      left: 50%;
+      animation-duration: 8s;
+    }
+
+    .orbital-dot:nth-child(5) {
+      top: 50%;
+      left: 100%;
+      animation-duration: 12s;
+    }
+
+    .orbital-dot:nth-child(6) {
+      top: 100%;
+      left: 50%;
+      animation-duration: 10s;
+    }
+
+    .orbital-dot:nth-child(7) {
+      top: 50%;
+      left: 0;
+      animation-duration: 14s;
+    }
+
+    @keyframes rotateRing {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes orbitDot {
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg); }
     }
 
     .creator-wrapper {
       text-align: center;
       position: relative;
+      z-index: 2;
     }
 
-    .creator-label {
+    .creator-label-top {
+      display: block;
       font-family: var(--sans);
       font-weight: 300;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 1rem;
+    }
+
+    /* Neon Frame Container */
+    .creator-btn-container {
+      position: relative;
+      display: inline-block;
+      padding: 4px;
+      border-radius: 60px;
+      background: linear-gradient(135deg, 
+        rgba(212,175,55,0) 0%, 
+        rgba(212,175,55,0.3) 20%, 
+        rgba(255,248,220,0.6) 50%, 
+        rgba(212,175,55,0.3) 80%, 
+        rgba(212,175,55,0) 100%
+      );
+      background-size: 200% 200%;
+      animation: neonSweep 3s ease-in-out infinite;
+      box-shadow: 
+        0 0 20px rgba(212,175,55,0.15),
+        0 0 40px rgba(212,175,55,0.08),
+        0 0 80px rgba(212,175,55,0.04),
+        inset 0 0 20px rgba(212,175,55,0.05);
+    }
+
+    @keyframes neonSweep {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 200% 50%; }
     }
 
     /* The Magic Button */
@@ -292,235 +410,140 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
-      padding: 1.4rem 3.5rem;
+      gap: 0.6rem;
+      padding: 1.6rem 4rem;
       font-family: var(--serif);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
-      color: var(--espresso);
-      background: linear-gradient(135deg, var(--gold) 0%, #C9A030 50%, var(--gold) 100%);
-      background-size: 200% 200%;
+      letter-spacing: 0.08em;
+      color: #1A1008;
+      background: linear-gradient(180deg, 
+        #F5D77A 0%, 
+        var(--gold) 30%, 
+        #B8941F 60%, 
+        #8B6914 100%
+      );
       border: none;
-      border-radius: 50px;
+      border-radius: 56px;
       cursor: pointer;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3), 0 0 0 0 rgba(212, 175, 55, 0);
-      animation: shimmerBg 3s ease-in-out infinite;
+      box-shadow: 
+        0 8px 40px rgba(212,175,55,0.35),
+        0 2px 10px rgba(212,175,55,0.2),
+        inset 0 2px 0 rgba(255,255,255,0.3),
+        inset 0 -2px 0 rgba(0,0,0,0.2);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
       z-index: 2;
-    }
-
-    @keyframes shimmerBg {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      min-width: 280px;
     }
 
     .creator-btn::before {
       content: '';
       position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      border-radius: 50px;
-      background: linear-gradient(45deg, var(--gold), #FFF8DC, var(--gold), #FFF8DC);
-      background-size: 400% 400%;
-      z-index: -1;
-      animation: borderGlow 3s ease-in-out infinite;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    @keyframes borderGlow {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.4) 30%,
+        rgba(255,255,255,0.6) 50%,
+        rgba(255,255,255,0.4) 70%,
+        transparent 100%
+      );
+      transition: left 0.7s ease;
     }
 
     .creator-btn:hover::before {
-      opacity: 1;
+      left: 100%;
     }
 
     .creator-btn:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.2);
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 
+        0 20px 60px rgba(212,175,55,0.5),
+        0 5px 20px rgba(212,175,55,0.3),
+        0 0 100px rgba(212,175,55,0.2),
+        inset 0 2px 0 rgba(255,255,255,0.4),
+        inset 0 -2px 0 rgba(0,0,0,0.3);
       color: #000;
     }
 
     .creator-btn:active {
-      transform: scale(0.97);
-      transition: transform 0.1s ease;
+      transform: scale(0.95);
+      transition: transform 0.15s ease;
+      box-shadow: 
+        0 4px 15px rgba(212,175,55,0.4),
+        inset 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    .btn-sparkle {
-      display: inline-block;
-      font-size: 1.3rem;
-      animation: sparkleFloat 2s ease-in-out infinite;
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      animation: iconFloat 3s ease-in-out infinite;
     }
 
-    .btn-sparkle:nth-child(1) {
+    .btn-icon.left {
       animation-delay: 0s;
     }
 
-    .btn-sparkle:nth-child(3) {
-      animation-delay: 0.5s;
+    .btn-icon.right {
+      animation-delay: 0.8s;
     }
 
-    @keyframes sparkleFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-      50% { transform: translateY(-5px) rotate(15deg); opacity: 1; }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      30% { transform: translateY(-6px) rotate(10deg); }
+      60% { transform: translateY(2px) rotate(-5deg); }
     }
 
-    /* Reveal Card */
-    .creator-reveal {
+    /* Ripple effect on click */
+    .ripple {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: rgba(30, 20, 16, 0.95);
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      border-radius: 2rem;
-      padding: 3rem 2.5rem;
-      text-align: center;
-      z-index: 10;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212, 175, 55, 0.15);
-      min-width: 380px;
-      max-width: 90vw;
-    }
-
-    .creator-reveal.active {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .reveal-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-
-    .reveal-title {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .reveal-subtitle {
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.1em;
-      margin-bottom: 2rem;
-    }
-
-    .reveal-line {
-      width: 50px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 auto 1.5rem;
-    }
-
-    .telegram-id {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 1rem 2rem;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-
-    .telegram-id:hover {
-      background: rgba(212, 175, 55, 0.15);
-      border-color: var(--gold);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-      transform: scale(1.05);
-    }
-
-    .telegram-icon {
-      font-size: 1.5rem;
-      animation: telegramBounce 2s ease-in-out infinite;
-    }
-
-    @keyframes telegramBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    .telegram-text {
-      font-family: var(--sans);
-      font-weight: 400;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-    }
-
-    .telegram-arrow {
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: 1.2rem;
-      color: var(--gold);
-      transition: transform 0.3s ease;
-    }
-
-    .telegram-id:hover .telegram-arrow {
-      transform: translateX(-5px);
-    }
-
-    .close-reveal {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 50%;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.5);
+      transform: scale(0);
+      animation: rippleEffect 0.8s ease-out;
+      pointer-events: none;
     }
 
-    .close-reveal:hover {
-      background: rgba(220, 38, 38, 0.2);
-      border-color: rgba(220, 38, 38, 0.4);
-      color: #FCA5A5;
+    @keyframes rippleEffect {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
 
-    /* Dark overlay */
+    /* Creator Label Below Button */
+    .creator-subtitle {
+      display: block;
+      margin-top: 1.2rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    /* ============ OVERLAY ============ */
     .creator-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 5;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 50;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s ease;
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     .creator-overlay.active {
@@ -528,23 +551,310 @@
       pointer-events: all;
     }
 
-    .creator-quote {
-      margin-top: 1.5rem;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.05em;
+    /* ============ REVEAL CARD — JEWEL BOX ============ */
+    .creator-reveal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0) rotateY(90deg);
+      background: linear-gradient(145deg, 
+        rgba(30,20,16,0.98) 0%, 
+        rgba(20,12,8,0.98) 100%
+      );
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 2px solid;
+      border-image: linear-gradient(135deg, 
+        rgba(212,175,55,0.6), 
+        rgba(255,248,220,0.9), 
+        rgba(212,175,55,0.6)
+      ) 1;
+      border-radius: 2.5rem;
+      padding: 4rem 3rem;
+      text-align: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 
+        0 40px 100px rgba(0,0,0,0.7),
+        0 0 80px rgba(212,175,55,0.1),
+        inset 0 2px 0 rgba(255,255,255,0.05);
+      width: 480px;
+      max-width: 92vw;
     }
 
-    /* VIP Footer */
-    .vip-footer {
-      background: rgba(20, 12, 8, 0.9);
-      border-top: 1px solid rgba(212, 175, 55, 0.15);
+    .creator-reveal.active {
+      transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Sparkle field inside reveal */
+    .sparkle-field {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: 2.5rem;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkleBurst 2s ease-in-out infinite;
+    }
+
+    .sparkle:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 0.3s; }
+    .sparkle:nth-child(3) { top: 55%; left: 15%; animation-delay: 0.6s; }
+    .sparkle:nth-child(4) { top: 70%; left: 80%; animation-delay: 0.9s; }
+    .sparkle:nth-child(5) { top: 40%; left: 50%; animation-delay: 1.2s; }
+    .sparkle:nth-child(6) { top: 85%; left: 35%; animation-delay: 1.5s; }
+    .sparkle:nth-child(7) { top: 10%; left: 60%; animation-delay: 0.4s; }
+    .sparkle:nth-child(8) { top: 50%; left: 90%; animation-delay: 0.8s; }
+
+    @keyframes sparkleBurst {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      30% { opacity: 1; transform: scale(1); }
+      60% { opacity: 0.3; transform: scale(2); }
+    }
+
+    .reveal-gem {
       position: relative;
       z-index: 1;
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      animation: gemGlow 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
     }
 
+    @keyframes gemGlow {
+      0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 20px rgba(212,175,55,0.4));
+      }
+      50% { 
+        transform: scale(1.15) rotate(5deg);
+        filter: drop-shadow(0 0 40px rgba(212,175,55,0.8));
+      }
+    }
+
+    .reveal-title {
+      position: relative;
+      z-index: 1;
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(180deg, #FFF8DC 0%, var(--gold) 50%, #8B6914 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .reveal-subtitle {
+      position: relative;
+      z-index: 1;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+
+    .reveal-divider {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .divider-line {
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .divider-line:last-child {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .divider-icon {
+      font-size: 0.8rem;
+      color: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* Telegram Link Card */
+    .telegram-link-wrapper {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      perspective: 1000px;
+    }
+
+    .telegram-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 2.5rem;
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 60px;
+      text-decoration: none;
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .telegram-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(212,175,55,0) 0%, 
+        rgba(212,175,55,0.15) 50%, 
+        rgba(212,175,55,0) 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .telegram-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .telegram-card:hover {
+      background: rgba(212,175,55,0.12);
+      border-color: var(--gold);
+      box-shadow: 
+        0 0 40px rgba(212,175,55,0.2),
+        0 0 80px rgba(212,175,55,0.08),
+        inset 0 0 30px rgba(212,175,55,0.05);
+      transform: translateY(-4px) rotateX(5deg);
+    }
+
+    .telegram-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0088cc, #006699);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 20px rgba(0,136,204,0.3);
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+    }
+
+    .telegram-card:hover .telegram-avatar {
+      box-shadow: 0 0 30px rgba(0,136,204,0.5);
+      transform: scale(1.1);
+    }
+
+    .telegram-info {
+      text-align: right;
+    }
+
+    .telegram-label {
+      display: block;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .telegram-username {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .telegram-card:hover .telegram-username {
+      color: #FFF8DC;
+    }
+
+    .telegram-arrow-icon {
+      font-size: 1.3rem;
+      color: var(--gold);
+      transition: all 0.3s ease;
+    }
+
+    .telegram-card:hover .telegram-arrow-icon {
+      transform: translateX(-6px);
+      color: #FFF8DC;
+    }
+
+    /* Close Button */
+    .close-reveal {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.4s ease;
+      z-index: 5;
+    }
+
+    .close-reveal:hover {
+      background: rgba(220, 38, 38, 0.2);
+      border-color: rgba(220, 38, 38, 0.5);
+      color: #FCA5A5;
+      transform: rotate(90deg);
+      box-shadow: 0 0 20px rgba(220,38,38,0.3);
+    }
+
+    /* Footer note */
+    .creator-footer-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 2rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ============ RESPONSIVE ============ */
     @media (max-width: 768px) {
       .vip-products-grid {
         grid-template-columns: 1fr;
@@ -556,14 +866,41 @@
       }
 
       .creator-reveal {
-        min-width: auto;
-        width: 90vw;
-        padding: 2rem 1.5rem;
+        width: 94vw;
+        padding: 2.5rem 1.5rem;
       }
 
       .creator-btn {
-        padding: 1.2rem 2.5rem;
+        padding: 1.3rem 2.5rem;
         font-size: 1rem;
+        min-width: auto;
+      }
+
+      .reveal-title {
+        font-size: 1.8rem;
+      }
+
+      .telegram-card {
+        padding: 1rem 1.5rem;
+        gap: 0.8rem;
+      }
+
+      .telegram-username {
+        font-size: 1rem;
+      }
+
+      .orbital-container {
+        width: 250px;
+        height: 250px;
+      }
+
+      .orbital-ring:nth-child(1) { width: 220px; height: 220px; }
+      .orbital-ring:nth-child(2) { width: 180px; height: 180px; }
+      .orbital-ring:nth-child(3) { width: 140px; height: 140px; }
+
+      @keyframes orbitDot {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg); }
       }
     }
   </style>
@@ -615,7 +952,6 @@
     <div class="vip-section-line reveal"></div>
     
     <div class="vip-products-grid">
-      <!-- Product 1 -->
       <div class="vip-product-card reveal">
         <div class="vip-product-image">
           <img src="https://images.unsplash.com/photo-1551218372-a8789b81b253?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="خاویار بلوگا">
@@ -629,7 +965,6 @@
         </div>
       </div>
 
-      <!-- Product 2 -->
       <div class="vip-product-card reveal">
         <div class="vip-product-image">
           <img src="https://images.unsplash.com/photo-1579366948929-444b79881105?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="ترافل">
@@ -643,7 +978,6 @@
         </div>
       </div>
 
-      <!-- Product 3 -->
       <div class="vip-product-card reveal">
         <div class="vip-product-image">
           <img src="https://images.unsplash.com/photo-1589227365533-cee630bd59bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="زعفران">
@@ -657,7 +991,6 @@
         </div>
       </div>
 
-      <!-- Product 4 -->
       <div class="vip-product-card reveal">
         <div class="vip-product-image">
           <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="روغن کمیاب">
@@ -673,39 +1006,77 @@
     </div>
   </section>
 
-  <!-- ============ CREATOR SECTION ============ -->
+  <!-- ============ CREATOR SECTION — MASTERPIECE ============ -->
   <section class="creator-section">
+    <!-- Orbital Rings -->
+    <div class="orbital-container">
+      <div class="orbital-ring"></div>
+      <div class="orbital-ring"></div>
+      <div class="orbital-ring"></div>
+      <div class="orbital-dot"></div>
+      <div class="orbital-dot"></div>
+      <div class="orbital-dot"></div>
+      <div class="orbital-dot"></div>
+    </div>
+
     <div class="creator-wrapper">
-      <p class="creator-label reveal">— طراحی و توسعه —</p>
+      <span class="creator-label-top reveal">— طراحی و توسعه —</span>
       
-      <!-- Magic Button -->
-      <button class="creator-btn reveal" id="creatorBtn">
-        <span class="btn-sparkle">✨</span>
-        سازنده سایت
-        <span class="btn-sparkle">✨</span>
-      </button>
-
-      <!-- Dark Overlay -->
-      <div class="creator-overlay" id="creatorOverlay"></div>
-
-      <!-- Reveal Card -->
-      <div class="creator-reveal" id="creatorReveal">
-        <button class="close-reveal" id="closeReveal">✕</button>
-        <div class="reveal-icon">💎</div>
-        <h3 class="reveal-title">ارتباط با سازنده</h3>
-        <p class="reveal-subtitle">برای پروژه‌های خاص و سفارشی</p>
-        <div class="reveal-line"></div>
-        
-        <a href="https://t.me/mosalaaty" target="_blank" class="telegram-id">
-          <span class="telegram-icon">✈️</span>
-          <span class="telegram-text">@mosalaaty</span>
-          <span class="telegram-arrow">→</span>
-        </a>
-        
-        <p class="creator-quote">"لوکس بودن یک انتخاب است، نه یک قیمت"</p>
+      <!-- Neon Frame + Button -->
+      <div class="creator-btn-container reveal">
+        <button class="creator-btn" id="creatorBtn">
+          <span class="btn-icon left">💎</span>
+          سازنده سایت
+          <span class="btn-icon right">💎</span>
+        </button>
       </div>
+      
+      <span class="creator-subtitle reveal">برای پروژه‌های لوکس و سفارشی</span>
     </div>
   </section>
+
+  <!-- ============ OVERLAY ============ -->
+  <div class="creator-overlay" id="creatorOverlay"></div>
+
+  <!-- ============ REVEAL CARD ============ -->
+  <div class="creator-reveal" id="creatorReveal">
+    <!-- Sparkles -->
+    <div class="sparkle-field">
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+
+    <button class="close-reveal" id="closeReveal">✕</button>
+    
+    <div class="reveal-gem">💠</div>
+    <h3 class="reveal-title">ارتباط با سازنده</h3>
+    <p class="reveal-subtitle">برای خلق تجربه‌های دیجیتال منحصربه‌فرد</p>
+    
+    <div class="reveal-divider">
+      <span class="divider-line"></span>
+      <span class="divider-icon">◆</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <div class="telegram-link-wrapper">
+      <a href="https://t.me/mosalaaty" target="_blank" class="telegram-card">
+        <div class="telegram-avatar">✈️</div>
+        <div class="telegram-info">
+          <span class="telegram-label">تلگرام</span>
+          <span class="telegram-username">@mosalaaty</span>
+        </div>
+        <span class="telegram-arrow-icon">→</span>
+      </a>
+    </div>
+
+    <p class="creator-footer-note">"لوکس بودن یک انتخاب است، نه یک قیمت"</p>
+  </div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer vip-footer">
@@ -733,29 +1104,52 @@
     const creatorOverlay = document.getElementById('creatorOverlay');
     const closeReveal = document.getElementById('closeReveal');
 
-    function openReveal() {
-      creatorReveal.classList.add('active');
-      creatorOverlay.classList.add('active');
-      creatorBtn.style.transform = 'scale(0.95)';
+    // Ripple effect on button
+    creatorBtn.addEventListener('click', function(e) {
+      // Create ripple
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 800);
+      
+      // Open reveal
       setTimeout(() => {
-        creatorBtn.style.transform = '';
-      }, 300);
-    }
+        creatorReveal.classList.add('active');
+        creatorOverlay.classList.add('active');
+      }, 200);
+    });
 
     function closeRevealFn() {
       creatorReveal.classList.remove('active');
       creatorOverlay.classList.remove('active');
     }
 
-    creatorBtn.addEventListener('click', openReveal);
     closeReveal.addEventListener('click', closeRevealFn);
     creatorOverlay.addEventListener('click', closeRevealFn);
 
-    // Close with Escape key
+    // Close with Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && creatorReveal.classList.contains('active')) {
         closeRevealFn();
       }
+    });
+
+    // ============ PARALLAX FOR ORBITAL RINGS ============
+    const orbitalContainer = document.querySelector('.orbital-container');
+    
+    document.addEventListener('mousemove', function(e) {
+      if (!orbitalContainer) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      orbitalContainer.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
     });
 
     // ============ ADD TO CART ============
@@ -764,13 +1158,15 @@
         e.stopPropagation();
         const originalText = this.textContent;
         this.textContent = '✓ افزوده شد';
-        this.style.background = 'var(--gold)';
-        this.style.color = 'var(--espresso)';
+        this.style.background = '#4ADE80';
+        this.style.color = 'white';
+        this.style.boxShadow = '0 0 30px rgba(74,222,128,0.5)';
         
         setTimeout(() => {
           this.textContent = originalText;
           this.style.background = '';
           this.style.color = '';
+          this.style.boxShadow = '';
         }, 2000);
       });
     });
