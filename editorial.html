@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VIP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@300&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:#050202;
+color:#fff;
+font-family:Inter;
+}
+
+nav{
+position:sticky;
+top:0;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(25px);
+}
+
+header{
+padding:160px 10%;
+text-align:center;
+background:radial-gradient(circle,#1a0a0a,#050202);
+}
+
+h1{
+font-family:"Playfair Display";
+font-size:54px;
+letter-spacing:8px;
+}
+
+.grid{
+padding:140px 10%;
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.03);
+padding:40px;
+border-radius:22px;
+transition:1s ease;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.locked{
+filter:blur(8px);
+opacity:.25;
+}
+
+a{
+color:#c8a45d;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="editorial.html">BACK</a>
+<a href="checkout.html">CHECKOUT</a>
+</nav>
+
+<header>
+<h1>PRIVATE MEMBERS CLUB</h1>
+<p style="opacity:.6;">Invitation-only culinary reality</p>
+</header>
+
+<div class="grid">
+
+<div class="card">
+<h3>Imperial Vault</h3>
+</div>
+
+<div class="card locked">
+<h3>Golden Reserve</h3>
+</div>
+
+<div class="card locked">
+<h3>Private Archive</h3>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Luxury Experience Engine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@300&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:#0a0505;
+color:#fff;
+font-family:Inter;
+overflow:hidden;
+cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor{
+width:16px;height:16px;
+border:1px solid #c8a45d;
+border-radius:50%;
+position:fixed;
+transform:translate(-50%,-50%);
+pointer-events:none;
+mix-blend-mode:screen;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+radial-gradient(circle at center,#1a0a0a,#050202);
+}
+
+h1{
+font-family:"Playfair Display";
+font-size:80px;
+letter-spacing:18px;
+font-weight:400;
+opacity:0;
+transform:translateY(30px);
+animation:in 2s forwards;
+}
+
+p{
+opacity:0;
+animation:in 2s forwards .5s;
+letter-spacing:4px;
+}
+
+a{
+margin-top:50px;
+padding:14px 36px;
+border:1px solid rgba(200,164,93,0.35);
+color:#fff;
+text-decoration:none;
+letter-spacing:3px;
+opacity:0;
+animation:in 2s forwards 1s;
+transition:.6s;
+}
+
+a:hover{
+transform:scale(1.05);
+background:rgba(200,164,93,0.1);
+}
+
+/* cinematic transition layer */
+.transition{
+position:fixed;
+inset:0;
+background:#0a0505;
+transform:scaleY(0);
+transform-origin:bottom;
+z-index:999;
+transition:1s cubic-bezier(.76,0,.24,1);
+}
+
+@keyframes in{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+<div class="transition" id="t"></div>
+
+<section class="hero">
+<h1>ATELIER OF TASTE</h1>
+<p>A MULTISENSORY DIGITAL EXPERIENCE</p>
+
+<a href="atelier.html" onclick="go(event)">ENTER EXPERIENCE</a>
+</section>
+
+<script>
+
+const c=document.querySelector(".cursor");
+document.addEventListener("mousemove",e=>{
+c.style.left=e.clientX+"px";
+c.style.top=e.clientY+"px";
+});
+
+function go(e){
+e.preventDefault();
+document.getElementById("t").style.transform="scaleY(1)";
+setTimeout(()=>location.href="atelier.html",900);
+}
+
+</script>
+
+</body>
+</html>
