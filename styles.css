@@ -1,3 +1,8 @@
+/* ============================================================
+   NOIR & OR — LUXURY FOOD BOUTIQUE
+   Complete Design System — All Pages
+   ============================================================ */
+
 /* ============ RESET & ROOT ============ */
 *,
 *::before,
@@ -10,21 +15,27 @@
 :root {
   --burgundy: #4A0E17;
   --burgundy-dark: #2C080E;
+  --burgundy-light: #6B1A28;
   --espresso: #1E1410;
   --espresso-light: #2A1F1A;
   --white: #FFFFFF;
   --off-white: #F5F2EF;
   --gold: #D4AF37;
+  --gold-dark: #B8941F;
   --gold-light: rgba(212, 175, 55, 0.15);
   --gold-glow: rgba(212, 175, 55, 0.5);
-  --serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  
+  --serif: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  
   --transition-slow: 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   --transition-medium: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   --transition-fast: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  
   --shadow-card: 0 4px 20px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
   --shadow-card-hover: 0 20px 50px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.08);
   --shadow-gold: 0 0 40px rgba(212, 175, 55, 0.3), 0 0 80px rgba(212, 175, 55, 0.1);
+  --shadow-nav: 0 2px 20px rgba(0,0,0,0.3);
 }
 
 html {
@@ -41,10 +52,23 @@ body {
   color: var(--espresso);
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: default;
 }
 
-/* ============ CUSTOM CURSOR (OPTIONAL LUXURY TOUCH) ============ */
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--espresso);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ============ CUSTOM CURSOR ============ */
 .cursor {
   width: 20px;
   height: 20px;
@@ -64,32 +88,20 @@ body {
   border-color: transparent;
 }
 
-/* ============ TYPOGRAPHY ============ */
-.serif {
-  font-family: var(--serif);
-}
-
-.sans {
-  font-family: var(--sans);
-}
-
-/* ============ NAVIGATION ============ */
+/* ============ NAVIGATION — FIXED TOP FOR ALL PAGES ============ */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.5rem 0;
+  padding: 1.2rem 0;
   transition: all var(--transition-medium);
-}
-
-.nav.scrolled {
-  background: rgba(30, 20, 16, 0.85);
+  background: rgba(30, 20, 16, 0.92);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-  padding: 1rem 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: var(--shadow-nav);
 }
 
 .nav-inner {
@@ -99,47 +111,52 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 .nav-brand {
   font-family: var(--serif);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: var(--white);
+  color: var(--gold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   transition: color var(--transition-medium);
+  white-space: nowrap;
 }
 
-.nav.scrolled .nav-brand {
-  color: var(--gold);
+.nav-brand:hover {
+  color: var(--white);
 }
 
 .nav-links {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   list-style: none;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .nav-link {
   font-family: var(--sans);
   font-weight: 300;
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   position: relative;
-  padding: 0.3rem 0;
+  padding: 0.4rem 0;
   transition: color var(--transition-medium);
+  white-space: nowrap;
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 1px;
@@ -179,6 +196,7 @@ body {
   transition: all var(--transition-medium);
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -206,12 +224,13 @@ body {
 .btn-gold:hover {
   box-shadow: var(--shadow-gold);
   transform: translateY(-2px);
+  background: var(--gold-dark);
 }
 
 .btn-ghost {
   background: transparent;
   color: var(--white);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1rem 2.5rem;
   border-radius: 50px;
 }
@@ -220,6 +239,20 @@ body {
   border-color: var(--gold);
   color: var(--gold);
   background: rgba(212, 175, 55, 0.05);
+}
+
+.btn-ghost-dark {
+  background: transparent;
+  color: var(--espresso);
+  border: 1px solid rgba(30, 20, 16, 0.2);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+}
+
+.btn-ghost-dark:hover {
+  border-color: var(--burgundy);
+  color: var(--burgundy);
+  background: rgba(74, 14, 23, 0.03);
 }
 
 /* ============ SECTION HEADERS ============ */
@@ -236,6 +269,7 @@ body {
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1rem;
+  display: block;
 }
 
 .section-title {
@@ -254,7 +288,7 @@ body {
   margin: 1.5rem auto 0;
 }
 
-/* ============ REVEAL ANIMATION BASE ============ */
+/* ============ REVEAL ANIMATION ============ */
 .reveal {
   opacity: 0;
   transform: translateY(60px);
@@ -265,20 +299,6 @@ body {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ============ SCROLLBAR ============ */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--espresso);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 2px;
 }
 
 /* ============ PAGE TRANSITION OVERLAY ============ */
@@ -299,4 +319,132 @@ body {
 .page-transition.active {
   transform: scaleY(1);
   transform-origin: top;
+}
+
+/* ============ KEYFRAMES ============ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ============ FOOTER — ALL PAGES ============ */
+.footer {
+  background: #16100D;
+  padding: 4rem 0;
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.footer-brand p {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ============ RESPONSIVE GLOBAL ============ */
+@media (max-width: 900px) {
+  .nav-inner {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2rem;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.7rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
 }
